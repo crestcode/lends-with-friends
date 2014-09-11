@@ -2,9 +2,9 @@
 
 FactoryGirl.define do
   factory :friend do
-    first_name "MyString"
-    last_name "MyString"
-    email "MyString"
-    phone "MyString"
+    first_name 'Test'
+    last_name 'Test'
+    email 'test@test.com'
+    phone '555-555-5555'
   end
 end
