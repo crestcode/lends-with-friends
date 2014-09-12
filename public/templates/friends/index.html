@@ -9,6 +9,7 @@
         <th>Last Name</th>
         <th>Email</th>
         <th>Phone</th>
+        <th>Loans</th>
         <th></th>
       </tr>
       <tr ng-hide="friends.length" >
@@ -19,6 +20,7 @@
         <td>{{friend.last_name}}</td>
         <td>{{friend.email}}</td>
         <td>{{friend.phone}}</td>
+        <td>{{friend.loans.length}}</td>
         <td>
           <a href="#/friends/{{friend.id}}/edit">Edit</a> | <a href="" ng-click="deleteFriend(friend.id)">Remove</a>
         </td>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140911204328) do
+ActiveRecord::Schema.define(version: 20140912164416) do
 
   create_table "friends", force: true do |t|
     t.string   "first_name"
@@ -21,5 +21,14 @@ ActiveRecord::Schema.define(version: 20140911204328) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "loans", force: true do |t|
+    t.string   "item"
+    t.integer  "friend_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "loans", ["friend_id"], name: "index_loans_on_friend_id"
 
 end

@@ -1,31 +1,60 @@
 <div class="form-group" ng-class="{'has-error' : submitted && friendForm.first_name.$invalid}">
   <label class="control-label col-md-3">First name <span class="required">* </span> </label>
+
   <div class="col-md-4">
-    <input type="text" name="first_name" class="form-control" ng-model="friend.first_name" required placeholder="first name"/>
+    <input type="text" name="first_name" class="form-control" ng-model="friend.first_name" required
+           placeholder="first name"/>
   </div>
   <p ng-show=" submitted && friendForm.first_name.$invalid" class="help-block">First name is required.</p>
 </div>
 <div class="form-group" ng-class="{'has-error' : submitted && friendForm.last_name.$invalid}">
   <label class="control-label col-md-3">Last name <span class="required">* </span> </label>
+
   <div class="col-md-4">
-    <input type="text" name="last_name" class="form-control" ng-model="friend.last_name" required placeholder="last name"/>
+    <input type="text" name="last_name" class="form-control" ng-model="friend.last_name" required
+           placeholder="last name"/>
   </div>
   <p ng-show=" submitted && friendForm.last_name.$invalid" class="help-block">Last name is required.</p>
 </div>
 <div class="form-group" ng-class="{'has-error' : submitted && friendForm.email.$invalid}">
   <label class="control-label col-md-3">Email <span class="required">* </span> </label>
+
   <div class="col-md-4">
-    <input type="email" name="email" class="form-control" ng-model="friend.email" required placeholder="test@example.com"/>
+    <input type="email" name="email" class="form-control" ng-model="friend.email" required
+           placeholder="test@example.com"/>
   </div>
   <p ng-show="submitted && friendForm.email.$error.required" class="help-block">Email is required.</p>
+
   <p ng-show="submitted && friendForm.email.$error.email" class="help-block">Enter valid email</p>
 </div>
 <div class="form-group">
   <label class="control-label col-md-3">Phone </label>
+
   <div class="col-md-4">
     <input type="text" name="phone" class="form-control" ng-model="friend.phone" placeholder="987-654-3210"/>
   </div>
   <p ng-show="submitted && friendForm.phone.$invalid" class="help-block">Phone is required.</p>
+</div>
+<h3>Loans</h3>
+<div ng-repeat="loan in friend.loans">
+  <div ng-hide="loan._destroy">
+    <div class="form-group">
+      <label class="control-label col-md-3">Item </label>
+
+      <div class="col-md-3">
+        <input type="text" class="form-control" ng-model="loan.item" placeholder="Item"/>
+      </div>
+      <div class="col-md-2">
+        <a ng-click="removeLoan($index, friend)" class="btn btn-xs btn-danger">X</a>
+      </div>
+    </div>
+    <hr/>
+  </div>
+</div>
+<div class="form-group">
+  <div class="col-md-offset-12">
+    <a ng-click="addLoan()" class="btn btn-success btn-xs">+ Lend an item </a>
+  </div>
 </div>
 
 <div class="form-group">

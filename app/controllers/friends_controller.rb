@@ -39,7 +39,12 @@ class FriendsController < ApplicationController
   private
 
   def friend_params
-    params.fetch(:friend, {}).permit(:first_name, :last_name, :email, :phone)
+    unless params['friend']['loans'].blank?
+      params['friend']['loans_attributes'] = params['friend']['loans']
+      params['friend'].delete('loans')
+    end
+    params.fetch(:friend, {}).permit(:first_name, :last_name, :email, :phone,
+                                     :loans_attributes => [:id, :item, :_destroy, :friend_id])
   end
 
   def get_friend
