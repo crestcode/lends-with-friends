@@ -69,4 +69,13 @@ describe FriendsController do
       expect(parse_json(response)).to eql('friend' => {'last_name' => ['can\'t be blank']})
     end
   end
+
+  describe '#destroy' do
+    it 'should delete a friend and return a 200 status' do
+      delete :destroy, id: friend, format: :json
+
+      expect(response.status).to eq(200)
+      expect(Friend.find_by_id(friend.id)).to be_nil
+    end
+  end
 end

@@ -31,6 +31,11 @@ class FriendsController < ApplicationController
     end
   end
 
+  def destroy
+    @friend.destroy
+    render json: {}, status: :ok
+  end
+
   private
 
   def friend_params
