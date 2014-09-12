@@ -1,0 +1,28 @@
+<br/>
+<div class="row">
+  <div class="col-md-12">
+    <a class="btn btn-primary" href="#/friends/new">Create a friend</a>
+    <h3 class="block">Friends</h3>
+    <table class="table table-striped">
+      <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th></th>
+      </tr>
+      <tr ng-hide="friends.length" >
+        <td colspan="5">No friends found, Please create one.</td>
+      </tr>
+      <tr ng-show="friends.length" ng-repeat="friend in friends">
+        <td>{{friend.first_name}}</td>
+        <td>{{friend.last_name}}</td>
+        <td>{{friend.email}}</td>
+        <td>{{friend.phone}}</td>
+        <td>
+          <a href="#/friends/{{friend.id}}/edit">Edit</a> | <a href="" ng-click="deleteFriend(friend.id)">Remove</a>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>
