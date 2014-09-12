@@ -23,6 +23,14 @@ class FriendsController < ApplicationController
     respond_with(@friend.as_json)
   end
 
+  def update
+    if @friend.update_attributes(friend_params)
+      render json: @friend.as_json, status: :ok
+    else
+      render json: {friend: @friend.errors}, status: :unprocessable_entity
+    end
+  end
+
   private
 
   def friend_params

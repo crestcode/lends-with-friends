@@ -17,7 +17,7 @@ describe FriendsController do
 
   describe '#create' do
     it 'should be able to create a new user' do
-      post :create, :friend => {first_name: 'Test', last_name: 'User', email: 'test@test.com', phone: '555-555-5555'}, format: :json
+      post :create, friend: {first_name: 'Test', last_name: 'User', email: 'test@test.com', phone: '555-555-5555'}, format: :json
 
       expect(response.status).to eq(200)
 
@@ -29,7 +29,7 @@ describe FriendsController do
     end
 
     it 'should respond with 204 status and error messages if invalid friend data' do
-      post :create, :friend => {first_name: nil, last_name: 'Tester', email: 'test@test.com'}, format: :json
+      post :create, friend: {first_name: nil, last_name: 'Tester', email: 'test@test.com'}, format: :json
 
       expect(response.status).to eq(204)
       expect(parse_json(response)).to eql('friend' => {'first_name' => ['can\'t be blank']})
@@ -56,6 +56,17 @@ describe FriendsController do
 
   describe '#update' do
     it 'should update a friend and return 200 status' do
+      patch :update, id: friend, friend: {phone: '555-555-5555'}, format: :json
+
+      expect(response.status).to eq(200)
+      expect(friend.reload.phone).to eql('555-555-5555')
+    end
+
+    it 'should return with 422 status and error messages if attempting to update friend with friend data' do
+      patch :update, id: friend, friend: {last_name: nil}, format: :json
+
+      expect(response.status).to eq(422)
+      expect(parse_json(response)).to eql('friend' => {'last_name' => ['can\'t be blank']})
     end
   end
 end
