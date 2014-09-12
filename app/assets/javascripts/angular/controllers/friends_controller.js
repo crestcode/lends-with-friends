@@ -30,6 +30,32 @@ myApp.controller("FriendListCtr", ['$scope', '$http', '$resource', 'Friends', 'F
   };
 }]);
 
+myApp.controller("FriendAddCtr", ['$scope', '$resource', 'Friends', '$location', function ($scope, $resource, Friends, $location) {
+  $scope.friend = {loan: [{item: ''}]}
+  $scope.save = function () {
+    if ($scope.friendForm.$valid) {
+      Friends.create({friend: $scope.friend}, function () {
+        $location.path('/');
+      }, function (error) {
+        console.log(error)
+      });
+    }
+  };
+}]);
+
+myApp.controller("FriendUpdateCtr", ['$scope', '$resource', 'Friend', '$location', '$routeParams', function($scope, $resource, Friend, $location, $routeParams) {
+  $scope.friend = Friend.get({id: $routeParams.id})
+  $scope.update = function(){
+    if ($scope.friendForm.$valid){
+      Friend.update({id: $scope.friend.id},{friend: $scope.friend},function(){
+        $location.path('/');
+      }, function(error) {
+        console.log(error)
+      });
+    }
+  };
+}]);
+
 // Routes
 myApp.config([
   '$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
