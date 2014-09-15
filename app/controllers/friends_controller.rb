@@ -20,7 +20,7 @@ class FriendsController < ApplicationController
   end
 
   def show
-    respond_with(@friend.as_json)
+    respond_with(@friend, root: false)
   end
 
   def update

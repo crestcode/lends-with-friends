@@ -3,7 +3,4 @@ class Friend < ActiveRecord::Base
   has_many :loans, :dependent => :destroy
   accepts_nested_attributes_for :loans, allow_destroy: true, reject_if: :all_blank
 
-  def as_json(options={})
-    super(include: :loans)
-  end
 end
