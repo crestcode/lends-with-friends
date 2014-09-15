@@ -5,7 +5,7 @@ class FriendsController < ApplicationController
   def index
     @friends = Friend.all
     respond_with do |format|
-      format.json { render json: @friends.as_json }
+      format.json { render json: @friends, root: false }
       format.html
     end
   end
@@ -13,7 +13,7 @@ class FriendsController < ApplicationController
   def create
     @friend = Friend.new(friend_params)
     if @friend.save
-      render json: @friend.as_json, status: :ok
+      render json: @friend, root: false, status: :ok
     else
       render json: {friend: @friend.errors}, status: :no_content
     end
@@ -25,7 +25,7 @@ class FriendsController < ApplicationController
 
   def update
     if @friend.update_attributes(friend_params)
-      render json: @friend.as_json, status: :ok
+      render json: @friend, status: :ok
     else
       render json: {friend: @friend.errors}, status: :unprocessable_entity
     end

@@ -8,6 +8,7 @@ describe FriendsController do
 
       expect(response.status).to eq(200)
       json_response = parse_json(response).first
+      p "response:" + json_response.inspect
       expect(json_response['first_name']).to eql(friend.first_name)
       expect(json_response['last_name']).to eql(friend.last_name)
       expect(json_response['email']).to eql(friend.email)
