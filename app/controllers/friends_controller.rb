@@ -5,7 +5,7 @@ class FriendsController < ApplicationController
   def index
     @friends = Friend.all
     respond_with do |format|
-      format.json { render json: @friends, root: false }
+      format.json { render json: @friends }
       format.html
     end
   end
@@ -13,14 +13,14 @@ class FriendsController < ApplicationController
   def create
     @friend = Friend.new(friend_params)
     if @friend.save
-      render json: @friend, root: false, status: :ok
+      render json: @friend, status: :ok
     else
       render json: {friend: @friend.errors}, status: :no_content
     end
   end
 
   def show
-    respond_with(@friend, root: false)
+    respond_with(@friend)
   end
 
   def update
@@ -50,5 +50,9 @@ class FriendsController < ApplicationController
   def get_friend
     @friend = Friend.find_by_id(params[:id])
     render json: {}, status: :not_found unless @friend
+  end
+
+  def default_serializer_options
+    { root: false }
   end
 end
